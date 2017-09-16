@@ -6,8 +6,8 @@
 use Mix.Config
 
 # General application configuration
-config :restapi 
-  ecto_repos: [Restapi.Repo]
+#config :restapi
+#  ecto_repos: [Restapi.Repo]
 
 # Configures the endpoint
 config :restapi, RestapiWeb.Endpoint,

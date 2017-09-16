@@ -9,7 +9,7 @@ defmodule Restapi.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Restapi.Repo, []),
+      # supervisor(Restapi.Repo, []),
       # Start the endpoint when the application starts
       supervisor(RestapiWeb.Endpoint, []),
       # Start your own worker by calling: Restapi.Worker.start_link(arg1, arg2, arg3)
