@@ -36,7 +36,11 @@ defmodule Restapi.Datastore do
   end
 
   def handle_call({:getByID, id}, _from, state) do
-    {:reply, id, state}
+    {postID, _} = :string.to_integer(id)
+    post = Map.get(state, :posts)
+    |> Map.get(postID)
+
+    {:reply, post, state}
   end
 
   def handle_cast({:add, post}, state) do
@@ -47,22 +51,23 @@ defmodule Restapi.Datastore do
     posts = Map.get(state, :posts)
       |> Map.put(post.id, post)
 
-    
+
     new_state = Map.put(state, :lastID, state.lastID + 1)
       |> Map.put(:posts, posts)
 
     {:noreply, new_state}
   end
 
-  def handle_cast({:put, post}, state) do
+  def handle_cast({:put, %{"id" => postID} = post}, state) do
     posts = Map.get(state, :posts)
-      |> Map.put(post.id, post)
+      |> Map.put(postID, post)
 
     new_state = Map.put(state, :posts, posts)
     {:noreply, new_state}
   end
 
-  def handle_cast({:delete, postID}, state) do
+  def handle_cast({:delete, id}, state) do
+    {postID, _} = :string.to_integer(id)
     posts = Map.get(state, :posts)
       |> Map.delete(postID)
 

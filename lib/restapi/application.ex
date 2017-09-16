@@ -12,6 +12,7 @@ defmodule Restapi.Application do
       # supervisor(Restapi.Repo, []),
       # Start the endpoint when the application starts
       supervisor(RestapiWeb.Endpoint, []),
+      worker(Restapi.Datastore, [])
       # Start your own worker by calling: Restapi.Worker.start_link(arg1, arg2, arg3)
       # worker(Restapi.Worker, [arg1, arg2, arg3]),
     ]
